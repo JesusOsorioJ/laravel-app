@@ -1,66 +1,146 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyecto de API RESTful con Laravel y Node.js
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este proyecto consiste en una API RESTful desarrollada en Laravel que se comunica con un servidor WebSocket implementado en Node.js para notificaciones en tiempo real. La API incluye funcionalidades CRUD para gestionar cuentas y pedidos, y utiliza un servidor Node.js para manejar las notificaciones en tiempo real y almacenar los pedidos en MongoDB Atlas.
 
-## About Laravel
+## Tabla de Contenidos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- [Requerimientos](#requerimientos)
+- [Instalación](#instalación)
+- [Configuración](#configuración)
+- [Uso](#uso)
+- [Documentación de la API](#documentación-de-la-api)
+- [Pruebas de Endpoints](#pruebas-de-endpoints)
+- [Pruebas de Test](#pruebas-de-Test)
+## Pruebas Test
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requerimientos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Para ejecutar este proyecto, necesitas tener instalado:
 
-## Learning Laravel
+- PHP >= 8.0
+- Composer
+- Node.js >= 14.x
+- npm (incluido con Node.js)
+- MongoDB Atlas (o cualquier base de datos MongoDB accesible)
+- Laravel 8.x
+- Visual Studio Code con la extensión [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Instalación
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1. **Clona este repositorio:**
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    ```bash
+    git clone https://gitlab.com/usuario/proyecto.git
+    cd proyecto
+    ```
 
-## Laravel Sponsors
+2. **Instalar dependencias de Laravel:**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    ```bash
+    composer install
+    ```
 
-### Premium Partners
+3. **Instalar dependencias de Node.js:**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    Ve al directorio del servidor de Node.js:
 
-## Contributing
+    ```bash
+    cd node-server
+    npm install
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Configuración
 
-## Code of Conduct
+1. **Configurar Laravel:**
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    Copia el archivo `.env.example` y renómbralo a `.env`:
 
-## Security Vulnerabilities
+    ```bash
+    cp .env.example .env
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    Genera la clave de la aplicación:
 
-## License
+    ```bash
+    php artisan key:generate
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    Configura las variables de entorno para la base de datos y otros servicios en el archivo `.env`.
+
+2. **Configurar Node.js:**
+
+    Asegúrate de que el archivo `node-server/server.js` este seteada la ruta de la base de datos en `MONGO_DB_URI`
+
+
+## Uso
+
+### Levantar el Servidor de Laravel
+
+1. **Migrar la base de datos:**
+
+    ```bash
+    php artisan migrate
+    ```
+
+2. **Iniciar el servidor de Laravel:**
+
+    ```bash
+    php artisan serve
+    ```
+
+    El servidor estará disponible en `http://localhost:8000`.
+
+### Levantar el Servidor de Node.js
+
+1. **Inicia el servidor Node.js:**
+
+    Ve al directorio `nodejs-server` y ejecuta:
+
+    ```bash
+    node server.js
+    ```
+
+    El servidor de WebSocket estará disponible en `http://localhost:3000`.
+
+## Documentación de la API
+
+La documentación de la API se ha generado utilizando **Swagger**. Puedes acceder a ella visitando: http://localhost:8000/api/documentation
+
+Esta documentación incluye todos los endpoints disponibles, sus métodos, parámetros, respuestas, y ejemplos.
+
+## Pruebas de Endpoints
+
+Para probar los endpoints, se ha proporcionado un folder de `REST Client` en el directorio raíz del proyecto.
+
+### Cómo usar el archivo de `REST Client`:
+
+1. **Instalar la extensión REST Client en Visual Studio Code:**
+
+    Si aún no la tienes instalada, puedes encontrarla [aquí](https://marketplace.visualstudio.com/items?itemName=humao.rest-client).
+
+2. **Abrir el archivo `.rest`:**
+
+3. **Hacer requests:**
+
+    Haz clic en el botón `Send Request` al lado de cada bloque de solicitud para probar los diferentes endpoints de la API.
+
+## Pruebas de Test
+
+Para ejecutar las pruebas del proyecto, asegúrate de que tu entorno de desarrollo esté configurado correctamente y sigue los siguientes pasos:
+
+### Configuración de la Base de Datos de Pruebas
+
+1. Abre el archivo `.env` en la raíz del proyecto.
+2. Configura la base de datos de pruebas. Para usar SQLite en memoria, agrega las siguientes líneas:
+
+    ```env
+    DB_CONNECTION=sqlite
+    DB_DATABASE=:memory:
+    ```
+
+### Ejecutar Pruebas
+
+Para ejecutar todas las pruebas, abre tu terminal y corre el siguiente comando:
+
+```bash
+php artisan test

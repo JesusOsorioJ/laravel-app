@@ -69,7 +69,7 @@ Para ejecutar este proyecto, necesitas tener instalado:
 
 2. **Configurar Node.js:**
 
-    Asegúrate de que el archivo `server.js` este seteada la ruta de la base de datos en `MONGO_DB_URI`
+    Asegúrate de que el archivo `node-server/server.js` este seteada la ruta de la base de datos en `MONGO_DB_URI`
 
 
 ## Uso

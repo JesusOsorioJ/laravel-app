@@ -1,0 +1,401 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "CRUD: cuentas y pedidos",
+        "description": " La API incluye funcionalidades CRUD para gestionar cuentas y pedidos, y utiliza un servidor Node.js para manejar las notificaciones en tiempo real y almacenar los pedidos en MongoDB Atlas.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/cuentas": {
+            "get": {
+                "tags": [
+                    "Cuentas"
+                ],
+                "summary": "Obtener lista de cuentas",
+                "operationId": "a4981d38fdd340af086bec78d8cfd22f",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Cuenta"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Cuentas"
+                ],
+                "summary": "Crear una nueva cuenta",
+                "operationId": "5e9b76ea7602482e0edb2d889845e61c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cuenta"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cuenta creada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cuenta"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/cuentas/{id}": {
+            "get": {
+                "tags": [
+                    "Cuentas"
+                ],
+                "summary": "Obtener una cuenta por ID",
+                "operationId": "5c419760f1b3a0e93a2880d91314995a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cuenta encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cuenta"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Cuenta no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Cuentas"
+                ],
+                "summary": "Actualizar una cuenta",
+                "operationId": "ef77209fca53f80f80ea9954fbcebb2b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Cuenta"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cuenta actualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cuenta"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Cuenta no encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Cuentas"
+                ],
+                "summary": "Eliminar una cuenta",
+                "operationId": "4ef50d76bdbcffc5343061c800ff2723",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Cuenta eliminada"
+                    },
+                    "404": {
+                        "description": "Cuenta no encontrada"
+                    }
+                }
+            }
+        },
+        "/api/pedidos": {
+            "get": {
+                "tags": [
+                    "Pedidos"
+                ],
+                "summary": "Obtener lista de pedidos",
+                "operationId": "e848822b988b4e4cf96af0f71f29581c",
+                "responses": {
+                    "200": {
+                        "description": "Operación exitosa",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Pedido"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Pedidos"
+                ],
+                "summary": "Crear un nuevo pedido",
+                "operationId": "36884e796fd6f470919017f7ca543cd0",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Pedido"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Pedido creado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pedido"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Cuenta no encontrada"
+                    }
+                }
+            }
+        },
+        "/api/pedido/{id}": {
+            "get": {
+                "tags": [
+                    "Pedidos"
+                ],
+                "summary": "Obtener un pedido por ID",
+                "operationId": "cf2322882a0ffd010c1146ca3d559d4a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pedido encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pedido"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Pedido no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/pedidos/{id}": {
+            "put": {
+                "tags": [
+                    "Pedidos"
+                ],
+                "summary": "Actualizar un pedido",
+                "operationId": "c552afd071c0184bb7ded11c11c3bb41",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Pedido"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pedido actualizado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pedido"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Pedido no encontrado"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Pedidos"
+                ],
+                "summary": "Eliminar un pedido",
+                "operationId": "cb1cb130ebbbdcc1c60f9092878c3834",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Pedido eliminado"
+                    },
+                    "404": {
+                        "description": "Pedido no encontrado"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Cuenta": {
+                "title": "Cuenta",
+                "required": [
+                    "nombre",
+                    "email",
+                    "telefono"
+                ],
+                "properties": {
+                    "idCuenta": {
+                        "description": "ID de la cuenta",
+                        "type": "integer"
+                    },
+                    "nombre": {
+                        "description": "Nombre de la cuenta",
+                        "type": "string"
+                    },
+                    "email": {
+                        "description": "Email de la cuenta",
+                        "type": "string"
+                    },
+                    "telefono": {
+                        "description": "Teléfono de la cuenta",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Pedido": {
+                "title": "Pedido",
+                "required": [
+                    "idCuenta",
+                    "producto",
+                    "cantidad",
+                    "valor",
+                    "total"
+                ],
+                "properties": {
+                    "idPedido": {
+                        "description": "ID del pedido",
+                        "type": "integer"
+                    },
+                    "idCuenta": {
+                        "description": "ID de la cuenta asociada",
+                        "type": "integer"
+                    },
+                    "producto": {
+                        "description": "Nombre del producto",
+                        "type": "string"
+                    },
+                    "cantidad": {
+                        "description": "Cantidad del producto",
+                        "type": "integer"
+                    },
+                    "valor": {
+                        "description": "Valor del producto",
+                        "type": "number"
+                    },
+                    "total": {
+                        "description": "Total de pedido",
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Cuentas",
+            "description": "Cuentas"
+        },
+        {
+            "name": "Pedidos",
+            "description": "Pedidos"
+        }
+    ]
+}

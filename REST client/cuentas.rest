@@ -1,0 +1,44 @@
+### Obtener todas las cuentas
+GET http://localhost:8000/api/cuentas
+Accept: application/vnd.api+json
+
+###
+
+### Crear una nueva cuenta
+POST http://localhost:8000/api/cuentas
+Content-Type: application/json
+Accept: application/vnd.api+json
+
+{
+  "nombre": "Juan Perez",
+  "email": "juan.perez@example.com",
+  "telefono": "1234567890"
+}
+
+###
+
+### Obtener una cuenta específica por ID
+GET http://localhost:8000/api/cuentas/1
+Accept: application/vnd.api+json
+
+###
+
+### Actualizar una cuenta existente
+PUT http://localhost:8000/api/cuentas/1
+Content-Type: application/json
+Accept: application/vnd.api+json
+
+{
+  "nombre": "Juan Perez Actualizado",
+  "email": "juan.perez.nuevo@example.com",
+  "telefono": "0987654321"
+}
+
+###
+
+### Eliminar una cuenta existente
+DELETE http://localhost:8000/api/cuentas/1
+Accept: application/vnd.api+json
+
+###
+

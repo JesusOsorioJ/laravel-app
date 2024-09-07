@@ -1,0 +1,62 @@
+### Obtener todos los pedidos
+GET http://localhost:8000/api/pedidos
+Accept: application/vnd.api+json
+
+###
+
+### Crear un nuevo pedido
+POST http://localhost:8000/api/pedidos
+Content-Type: application/json
+Accept: application/vnd.api+json
+
+{
+  "idCuenta": 1,
+  "producto": "Laptop",
+  "cantidad": 2,
+  "valor": 1500,
+  "total": 3000
+}
+
+###
+
+### Obtener un pedido específico por ID
+GET http://localhost:8000/api/pedidos/1
+Accept: application/vnd.api+json
+
+###
+
+### Actualizar un pedido existente
+PUT http://localhost:8000/api/pedidos/1
+Content-Type: application/json
+Accept: application/vnd.api+json
+
+{
+  "producto": "Smartphone",
+  "cantidad": 1,
+  "valor": 700,
+  "total": 700
+}
+
+###
+
+### Cancelar (Eliminar) un pedido existente
+DELETE http://localhost:8000/api/pedidos/1
+Accept: application/vnd.api+json
+
+###
+
+### Notificar creación de pedido mediante WebSocket
+POST http://localhost:3000/send-notification
+Content-Type: application/json
+
+{
+  "idCuenta": 1,
+  "idPedido": 1,
+  "producto": "Laptop",
+  "cantidad": 2,
+  "valor": 1500,
+  "total": 3000,
+  "nombre": "Juan Perez",
+  "email": "juan.perez@example.com",
+  "telefono": "1234567890"
+}
